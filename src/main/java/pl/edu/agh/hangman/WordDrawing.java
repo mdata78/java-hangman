@@ -1,6 +1,7 @@
 package pl.edu.agh.hangman;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,24 +9,16 @@ import java.util.Scanner;
 
 public class WordDrawing {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException, FileNotFoundException {
+        File plik = new File("src/main/resources/slowa.txt");
 
-        StringBuilder sb = new StringBuilder();
-
-        try (BufferedReader br = Files.newBufferedReader(Paths.get("slowa.txt"))) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
+        Scanner myReader = new Scanner(plik);
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            System.out.println(data);
         }
-
-        System.out.println(sb);
-
+        myReader.close();
     }
-
 }
+
 
